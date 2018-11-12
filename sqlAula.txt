@@ -3,6 +3,8 @@ LOGIN: alunobdn
 SENHA: alunobdn
 BANCO: BDN
 
+Exercício de criação:
+01)
 create table CCUSTO(
 	CCusto bigint identity(1,1) primary key,
 	NomeCC nvarchar(200) null
@@ -11,5 +13,57 @@ create table CCUSTO(
 create table SECAO(
 	Secao bigint identity(1,1) primary key,
 	NomeSec nvarchar(200) null,
-	CCusto 
+	CCusto bigint null--FK
 )
+
+create table MATERIAL(
+	CdMat bigint identity(1,1) primary key,
+	DescrMatPrima nvarchar(500) null
+)
+
+create table ALMOXARIFE(
+	nAlmox bigint identity(1,1) primary key,
+	Almoxarife nvarchar(200) null
+)
+
+create table REQUISICAO(
+	NumReq bigint identity(1,1) primary key,
+	DtReq date null,
+	Secao bigint null,--FK
+	nAlmox bigint null--FK
+)
+
+create table REQ_MAT(
+	NumReq bigint identity(1,1) primary key,
+	CdMat bigint null,--FK
+	QtdReq int,
+	VlrUnit decimal(18,2)
+)
+
+02)
+03)
+04)
+05)
+06)
+
+Exercícios de consultas:
+01)
+02)
+03)
+04)
+05)
+06)
+07)
+08)
+09)
+10)
+11)
+12)
+13)
+14)
+15)
+16)
+17)
+18)
+19)
+20)
