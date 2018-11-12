@@ -1,0 +1,15 @@
+SERVIDOR: SRVSQL
+LOGIN: alunobdn
+SENHA: alunobdn
+BANCO: BDN
+
+create table CCUSTO(
+	CCusto bigint identity(1,1) primary key,
+	NomeCC nvarchar(200) null
+)
+
+create table SECAO(
+	Secao bigint identity(1,1) primary key,
+	NomeSec nvarchar(200) null,
+	CCusto 
+)
