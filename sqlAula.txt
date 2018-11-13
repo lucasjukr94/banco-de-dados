@@ -1,10 +1,10 @@
-SERVIDOR: SRVSQL
-LOGIN: alunobdn
-SENHA: alunobdn
-BANCO: BDN
+--SERVIDOR: SRVSQL
+--LOGIN: alunobdn
+--SENHA: alunobdn
+--BANCO: BDN
 
-Exercício de criação:
-01)
+--Exercício de criação:
+--01)
 create table CCUSTO(
 	CCusto char(10) primary key,
 	NomeCC char(200) null
@@ -40,7 +40,7 @@ create table REQ_MAT(
 	VlrUnit decimal(18,2)
 )
 
-02)
+--02)
 insert into CCUSTO(CCusto,NomeCC) values('10A','Sub-1')
 insert into CCUSTO(CCusto,NomeCC) values('10B','Mult-2')
 insert into CCUSTO(CCusto,NomeCC) values('11A','Sub-2')
@@ -96,24 +96,24 @@ insert into REQ_MAT(NumReq,CdMat,QtdReq,VlrUnit) values(105,102,20,3460)
 insert into REQ_MAT(NumReq,CdMat,QtdReq,VlrUnit) values(110,102,25,3200)
 insert into REQ_MAT(NumReq,CdMat,QtdReq,VlrUnit) values(111,100,15,1300)
 
-03)
+--03)
 insert into CCUSTO(CCusto,NomeCC) values('12B','Sub-4')
 insert into SECAO(Secao,NomeSec,CCusto) values('026','Produção-4','109')
 insert into MATERIAL(CdMat,DescrMatPrima) values(103,'Ácido Sulfúrico')
 insert into ALMOXARIFE(nAlmox,Almoxarife) values(1009,'Lourenço Melo de Souza')
 
-04)
+--04)
 update SECAO set NomeSec = 'Seção Teste 001' where 1=1 and Secao = '026'
 update CCusto set CCusto = '11A' where 1=1 and CCusto = '12B'
 
-05)
+--05)
 delete from CCusto where 1=1 and CCusto = '10C'
 
-06)
+--06)
 alter table MATERIAL add VlrUnit decimal(18,2)
 
-Exercícios de consultas:
-01)
+--Exercícios de consultas:
+--01)
 select
 	m.DsMatPrima,
 	r.DtReq,
@@ -125,7 +125,7 @@ from REQUISICAO r
 where 1=1
 	and m.DsMatPrima = 'Enxofre'
 
-02)
+--02)
 select
 	m.DsMatPrima,
 	r.DtReq
@@ -135,7 +135,7 @@ from REQUISICAO r
 where 1=1
 	and (r.DtReq = '20100601' or r.DtReq = '20100602')
 	
-03)
+--03)
 select
 	s.Secao,
 	r.NumReq,
@@ -148,23 +148,23 @@ from REQUISICAO r
 where 1=1
 	and s.Secao = '020'
 
-04)
+--04)
 select * from SECAO order by NomeSec
 
-05)
+--05)
 select * from ALMOXARIFE where 1=1 and Almoxarife like 'João%'
 
-06)
+--06)
 select distinct
 	m.*
 from REQUISICAO r
 	left join REQ_MAT rm on rm.NumReq = r.NumReq
 	left join MATERIAL m on m.CdMat = rm.CdMat
 
-07)
+--07)
 select * from SECAO where 1=1 and CCusto in ('10B','12A')
 
-08)
+--08)
 select
 	a.Almoxarife,
 	a.nAlmox,
@@ -176,7 +176,7 @@ from REQUISICAO r
 where 1=1
 	and a.Almoxarife in ('João da Silva','João Antônio')
 
-09)
+--09)
 select
 	m.DsMatPrima,
 	rm.NumReq,
@@ -186,7 +186,7 @@ from REQUISICAO r
 	left join MATERIAL m on m.CdMat = rm.CdMat
 order by m.DsMatPrima
 
-10)
+--10)
 select
 	s.NomeSec,
 	rm.QtdReq
@@ -196,7 +196,7 @@ from REQUISICAO r
 where 1=1
 	and s.NomeSec = 'Produção-1'
 
-11)
+--11)
 select
 	s.Secao,
 	s.NomeSec,
@@ -205,7 +205,7 @@ from REQUISICAO r
 	left join REQ_MAT rm on rm.NumReq = r.NumReq
 	left join SECAO s on s.Secao = r.Secao
 
-12)
+--12)
 select top 1
 	m.DsMatPrima,
 	r.DtReq
@@ -226,7 +226,7 @@ where 1=1
 	and m.DsMatPrima = 'Enxofre'
 order by r.DtReq desc
 
-13)
+--13)
 select
 	a.Almoxarife,
 	(sum(rm.QtdReq)/count(a.Almoxarife)) as MediaReqAlmox
@@ -235,7 +235,7 @@ from REQUISICAO r
 	left join REQ_MAT rm on rm.NumReq = r.NumReq
 group by a.Almoxarife
 
-14)
+--14)
 select
 	s.NomeSec,
 	sum((rm.QtdReq * rm.VlrUnit)) as VlrTotal
@@ -246,7 +246,7 @@ where 1=1
 	and s.NomeSec = 'Manutenção'
 group by s.NomeSec
 
-15)
+--15)
 select
 	a.Almoxarife,
 	sum((rm.QtdReq * rm.VlrUnit)) as VlrTotal
@@ -255,7 +255,7 @@ from REQUISICAO r
 	left join REQ_MAT rm on rm.NumReq = r.NumReq
 group by a.Almoxarife
 
-16)
+--16)
 select
 	a.*
 from REQUISICAO r
@@ -264,7 +264,7 @@ from REQUISICAO r
 where 1=1
 	and r.NumReq in ('102','103','105','111')
 
-17)
+--17)
 select
 	m.*
 from REQUISICAO r
@@ -274,7 +274,7 @@ from REQUISICAO r
 where 1=1
 	and s.CCusto <> '10A'
 
-18)
+--18)
 select top 1
 	m.DsMatPrima,
 	rm.VlrUnit
@@ -283,7 +283,7 @@ from REQUISICAO r
 	left join MATERIAL m on m.CdMat = rm.CdMat
 order by rm.VlrUnit desc
 
-19)
+--19)
 select top 5
 	m.*
 from REQUISICAO r
@@ -291,7 +291,7 @@ from REQUISICAO r
 	left join MATERIAL m on m.CdMat = rm.CdMat
 order by rm.QtdReq desc
 
-20)
+--20)
 select
 	c.CCusto as CdCCusto,
 	c.NomeCC as NmCCusto,
