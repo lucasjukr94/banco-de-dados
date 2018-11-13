@@ -6,41 +6,96 @@ BANCO: BDN
 Exercício de criação:
 01)
 create table CCUSTO(
-	CCusto bigint identity(1,1) primary key,
-	NomeCC nvarchar(200) null
+	CCusto char(10) primary key,
+	NomeCC char(200) null
 )
 
 create table SECAO(
-	Secao bigint identity(1,1) primary key,
-	NomeSec nvarchar(200) null,
-	CCusto bigint null--FK
+	Secao char(10) primary key,
+	NomeSec char(200) null,
+	CCusto char(10) null--FK
 )
 
 create table MATERIAL(
-	CdMat bigint identity(1,1) primary key,
-	DescrMatPrima nvarchar(500) null
+	CdMat bigint primary key,
+	DescrMatPrima char(500) null
 )
 
 create table ALMOXARIFE(
-	nAlmox bigint identity(1,1) primary key,
-	Almoxarife nvarchar(200) null
+	nAlmox bigint primary key,
+	Almoxarife char(200) null
 )
 
 create table REQUISICAO(
-	NumReq bigint identity(1,1) primary key,
+	NumReq bigint primary key,
 	DtReq date null,
-	Secao bigint null,--FK
+	Secao char(10) null,--FK
 	nAlmox bigint null--FK
 )
 
 create table REQ_MAT(
-	NumReq bigint identity(1,1) primary key,
-	CdMat bigint null,--FK
-	QtdReq int,
+	NumReq bigint not null,
+	CdMat bigint not null,
+	QtdReq bigint,
 	VlrUnit decimal(18,2)
 )
 
 02)
+insert into CCUSTO(CCusto,NomeCC) values('10A','Sub-1')
+insert into CCUSTO(CCusto,NomeCC) values('10B','Mult-2')
+insert into CCUSTO(CCusto,NomeCC) values('11A','Sub-2')
+insert into CCUSTO(CCusto,NomeCC) values('12A','Sub-3')
+
+insert into SECAO(Secao,NomeSec,CCusto) values('010','ADM','12A')
+insert into SECAO(Secao,NomeSec,CCusto) values('020','Manutenção','10A')
+insert into SECAO(Secao,NomeSec,CCusto) values('021','Produção-1','10A')
+insert into SECAO(Secao,NomeSec,CCusto) values('022','Reparos','10B')
+insert into SECAO(Secao,NomeSec,CCusto) values('023','Produção-2','11A')
+insert into SECAO(Secao,NomeSec,CCusto) values('024','Produção-3','11A')
+insert into SECAO(Secao,NomeSec,CCusto) values('025','Escritório','10B')
+
+insert into MATERIAL(CdMat,DescrMatPrima) values(100,'Enxofre')
+insert into MATERIAL(CdMat,DescrMatPrima) values(101,'Areia Monazitica')
+insert into MATERIAL(CdMat,DescrMatPrima) values(102,'Argila Moída')
+
+insert into ALMOXARIFE(nAlmox,Almoxarife) values(1001,'Joao da Silva')
+insert into ALMOXARIFE(nAlmox,Almoxarife) values(1002,'Antônio Prado')
+insert into ALMOXARIFE(nAlmox,Almoxarife) values(1003,'Lourenço')
+insert into ALMOXARIFE(nAlmox,Almoxarife) values(1004,'João Antônio')
+insert into ALMOXARIFE(nAlmox,Almoxarife) values(1005,'Silvino')
+insert into ALMOXARIFE(nAlmox,Almoxarife) values(1006,'Antônio Santos')
+insert into ALMOXARIFE(nAlmox,Almoxarife) values(1007,'Lourenço da Silva')
+insert into ALMOXARIFE(nAlmox,Almoxarife) values(1008,'Lourenço Melo')
+
+insert into REQUISICAO(NumReq,DtReq,Secao,nAlmox) values(101,'20100601','020',1001)
+insert into REQUISICAO(NumReq,DtReq,Secao,nAlmox) values(102,'20100601','021',1002)
+insert into REQUISICAO(NumReq,DtReq,Secao,nAlmox) values(103,'20100601','022',1003)
+insert into REQUISICAO(NumReq,DtReq,Secao,nAlmox) values(104,'20100602','023',1004)
+insert into REQUISICAO(NumReq,DtReq,Secao,nAlmox) values(105,'20100602','024',1005)
+insert into REQUISICAO(NumReq,DtReq,Secao,nAlmox) values(106,'20100602','020',1002)
+insert into REQUISICAO(NumReq,DtReq,Secao,nAlmox) values(107,'20100603','025',1008)
+insert into REQUISICAO(NumReq,DtReq,Secao,nAlmox) values(108,'20100603','025',1001)
+insert into REQUISICAO(NumReq,DtReq,Secao,nAlmox) values(109,'20100604','021',1006)
+insert into REQUISICAO(NumReq,DtReq,Secao,nAlmox) values(110,'20100604','010',1006)
+insert into REQUISICAO(NumReq,DtReq,Secao,nAlmox) values(111,'20100604','010',1007)
+
+insert into REQ_MAT(NumReq,CdMat,QtdReq,VlrUnit) values(101,100,8,12500)
+insert into REQ_MAT(NumReq,CdMat,QtdReq,VlrUnit) values(101,101,5,10000)
+insert into REQ_MAT(NumReq,CdMat,QtdReq,VlrUnit) values(106,100,15,15000)
+insert into REQ_MAT(NumReq,CdMat,QtdReq,VlrUnit) values(106,101,4,11000)
+insert into REQ_MAT(NumReq,CdMat,QtdReq,VlrUnit) values(102,101,6,11500)
+insert into REQ_MAT(NumReq,CdMat,QtdReq,VlrUnit) values(102,102,25,3400)
+insert into REQ_MAT(NumReq,CdMat,QtdReq,VlrUnit) values(109,101,5,12000)
+insert into REQ_MAT(NumReq,CdMat,QtdReq,VlrUnit) values(103,100,5,12800)
+insert into REQ_MAT(NumReq,CdMat,QtdReq,VlrUnit) values(103,101,7,12000)
+insert into REQ_MAT(NumReq,CdMat,QtdReq,VlrUnit) values(107,101,7,13000)
+insert into REQ_MAT(NumReq,CdMat,QtdReq,VlrUnit) values(108,100,12,11800)
+insert into REQ_MAT(NumReq,CdMat,QtdReq,VlrUnit) values(104,100,12,12000)
+insert into REQ_MAT(NumReq,CdMat,QtdReq,VlrUnit) values(104,101,9,11300)
+insert into REQ_MAT(NumReq,CdMat,QtdReq,VlrUnit) values(105,102,20,3460)
+insert into REQ_MAT(NumReq,CdMat,QtdReq,VlrUnit) values(110,102,25,3200)
+insert into REQ_MAT(NumReq,CdMat,QtdReq,VlrUnit) values(111,100,15,1300)
+
 03)
 04)
 05)
