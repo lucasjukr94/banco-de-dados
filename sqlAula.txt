@@ -114,13 +114,68 @@ alter table MATERIAL add VlrUnit decimal(18,2)
 
 Exercícios de consultas:
 01)
+select
+	m.DsMatPrima,
+	r.DtReq,
+	r.NumReq,
+	rm.QtdReq
+from REQUISICAO r
+	left join REQ_MAT rm on rm.NumReq = r.NumReq
+	left join MATERIAL m on m.CdMat = rm.CdMat
+where 1=1
+	and m.DsMatPrima = 'Enxofre'
+
 02)
+select
+	m.DsMatPrima,
+	r.DtReq
+from REQUISICAO r
+	left join REQ_MAT rm on rm.NumReq = r.NumReq
+	left join MATERIAL m on m.CdMat = rm.CdMat
+where 1=1
+	and (r.DtReq = '20100601' or r.DtReq = '20100602')
+	
 03)
+select
+	s.Secao,
+	r.NumReq,
+	m.DsMatPrima,
+	rm.QtdReq
+from REQUISICAO r
+	left join REQ_MAT rm on rm.NumReq = r.NumReq
+	left join MATERIAL m on m.CdMat = rm.CdMat
+	left join SECAO s on s.Secao = r.Secao
+where 1=1
+	and s.Secao = '020'
+
 04)
+select * from SECAO order by NomeSec
+
 05)
+select * from ALMOXARIFE where 1=1 and Almoxarife like 'João%'
+
 06)
+select distinct
+	m.*
+from REQUISICAO r
+	left join REQ_MAT rm on rm.NumReq = r.NumReq
+	left join MATERIAL m on m.CdMat = rm.CdMat
+
 07)
+select * from SECAO where 1=1 and CCusto in ('10B','12A')
+
 08)
+select
+	a.Almoxarife,
+	a.nAlmox,
+	c.NomeCC
+from REQUISICAO r
+	left join SECAO s on s.Secao = r.Secao
+	left join CCUSTO c on c.CCusto = s.CCusto
+	left join ALMOXARIFE a on a.nAlmox = r.nAlmox
+where 1=1
+	and a.Almoxarife in ('João da Silva','João Antônio')
+
 09)
 10)
 11)
