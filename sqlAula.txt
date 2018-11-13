@@ -115,7 +115,7 @@ alter table MATERIAL add VlrUnit decimal(18,2)
 --Exercícios de consultas:
 --01)
 select
-	m.DsMatPrima,
+	m.DescrMatPrima,
 	r.DtReq,
 	r.NumReq,
 	rm.QtdReq
@@ -123,11 +123,11 @@ from REQUISICAO r
 	left join REQ_MAT rm on rm.NumReq = r.NumReq
 	left join MATERIAL m on m.CdMat = rm.CdMat
 where 1=1
-	and m.DsMatPrima = 'Enxofre'
+	and m.DescrMatPrima = 'Enxofre'
 
 --02)
 select
-	m.DsMatPrima,
+	m.DescrMatPrima,
 	r.DtReq
 from REQUISICAO r
 	left join REQ_MAT rm on rm.NumReq = r.NumReq
@@ -139,7 +139,7 @@ where 1=1
 select
 	s.Secao,
 	r.NumReq,
-	m.DsMatPrima,
+	m.DescrMatPrima,
 	rm.QtdReq
 from REQUISICAO r
 	left join REQ_MAT rm on rm.NumReq = r.NumReq
@@ -178,13 +178,13 @@ where 1=1
 
 --09)
 select
-	m.DsMatPrima,
+	m.DescrMatPrima,
 	rm.NumReq,
 	r.DtReq
 from REQUISICAO r
 	left join REQ_MAT rm on rm.NumReq = r.NumReq
 	left join MATERIAL m on m.CdMat = rm.CdMat
-order by m.DsMatPrima
+order by m.DescrMatPrima
 
 --10)
 select
@@ -207,23 +207,23 @@ from REQUISICAO r
 
 --12)
 select top 1
-	m.DsMatPrima,
+	m.DescrMatPrima,
 	r.DtReq
 from REQUISICAO r
 	left join REQ_MAT rm on rm.NumReq = r.NumReq
 	left join MATERIAL m on m.CdMat = rm.CdMat
 where 1=1
-	and m.DsMatPrima = 'Enxofre'
+	and m.DescrMatPrima = 'Enxofre'
 order by r.DtReq
 union all
 select top 1
-	m.DsMatPrima,
+	m.DescrMatPrima,
 	r.DtReq
 from REQUISICAO r
 	left join REQ_MAT rm on rm.NumReq = r.NumReq
 	left join MATERIAL m on m.CdMat = rm.CdMat
 where 1=1
-	and m.DsMatPrima = 'Enxofre'
+	and m.DescrMatPrima = 'Enxofre'
 order by r.DtReq desc
 
 --13)
@@ -276,7 +276,7 @@ where 1=1
 
 --18)
 select top 1
-	m.DsMatPrima,
+	m.DescrMatPrima,
 	rm.VlrUnit
 from REQUISICAO r
 	left join REQ_MAT rm on rm.NumReq = r.NumReq
@@ -300,7 +300,7 @@ select
 	r.NumReq as NrReq,
 	r.DtReq,
 	m.CdMat,
-	m.DsMatPrima,
+	m.DescrMatPrima,
 	rm.QtdReq,
 	rm.VlrUnit,
 	(rm.QtdReq * rm.VlrUnit) as VlrTotal,
@@ -313,4 +313,3 @@ from REQUISICAO r
 	left join ALMOXARIFE a on a.nAlmox = r.nAlmox
 	left join CCUSTO c on c.CCusto = s.CCusto
 order by r.DtReq desc
-
