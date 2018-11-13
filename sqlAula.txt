@@ -97,9 +97,20 @@ insert into REQ_MAT(NumReq,CdMat,QtdReq,VlrUnit) values(110,102,25,3200)
 insert into REQ_MAT(NumReq,CdMat,QtdReq,VlrUnit) values(111,100,15,1300)
 
 03)
+insert into CCUSTO(CCusto,NomeCC) values('12B','Sub-4')
+insert into SECAO(Secao,NomeSec,CCusto) values('026','Produção-4','109')
+insert into MATERIAL(CdMat,DescrMatPrima) values(103,'Ácido Sulfúrico')
+insert into ALMOXARIFE(nAlmox,Almoxarife) values(1009,'Lourenço Melo de Souza')
+
 04)
+update SECAO set NomeSec = 'Seção Teste 001' where 1=1 and Secao = '026'
+update CCusto set CCusto = '11A' where 1=1 and CCusto = '12B'
+
 05)
+delete from CCusto where 1=1 and CCusto = '10C'
+
 06)
+alter table MATERIAL add VlrUnit decimal(18,2)
 
 Exercícios de consultas:
 01)
